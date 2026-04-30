@@ -1,0 +1,54 @@
+# Middleware's Added
+
+**Current version:** V1  
+**Last updated:** 2026-04-30T00:42:04.026258+00:00  
+**Last approved by:** — (_2026-04-24T01:41:30.004818+00:00_)  
+**Source PR:** https://github.com/Venkata-Bhumika-Guthi/Testing/pull/3
+
+## Current content
+
+# PR-3: Middleware's Added
+## Summary
+This pull request introduces a middleware layer for the backend, enhancing request lifecycle control, security, and performance. Key features include CORS handling, GZIP compression, HTTPS redirection, trusted host enforcement, and WSGI integration. Additionally, it adds async exit stack utilities for improved resource management.
+
+## Why this change exists
+The change aims to strengthen the backend's security posture and optimize performance by implementing middleware functionalities that manage requests more effectively.
+
+## What changed (by area)
+- **Middleware Integration**: 
+  - `__init__.py`: Added import for `Middleware` from `starlette.middleware`.
+- **New Middleware Classes**:
+  - `asyncexitstack.py`: Introduced `AsyncExitStackMiddleware` for managing resources after requests.
+  - `cors.py`: Added CORS middleware.
+  - `gzip.py`: Added GZIP compression middleware.
+  - `httpsredirect.py`: Added HTTPS redirection middleware.
+  - `trustedhost.py`: Added trusted host middleware.
+  - `wsgi.py`: Added WSGI middleware.
+
+## How to verify / test
+To verify the changes, ensure that the middleware functionalities are correctly integrated and operational. This can be done by:
+1. Running the application and checking if CORS, GZIP, HTTPS redirection, and trusted host functionalities work as expected.
+2. Testing the `AsyncExitStackMiddleware` to confirm that resources are managed properly after requests.
+
+## Operational notes (rollout, migrations, feature flags)
+**Not specified in PR materials.**
+
+## Risks / edge cases
+- Potential conflicts with existing middleware if not properly configured.
+- Performance implications if the middleware stack is not optimized.
+
+## Follow-ups
+**Not specified in PR materials.**
+
+## References
+- PR: [https://github.com/Venkata-Bhumika-Guthi/Testing/pull/3](https://github.com/Venkata-Bhumika-Guthi/Testing/pull/3)
+
+## Source evidence (summary)
+
+```json
+{'github': {'additions': 28, 'deletions': 0, 'changed_files': 7}}
+```
+
+## Version history
+
+- [V1](./versions/v1.md) — _imported_
