@@ -1,0 +1,105 @@
+/* Minimal doc layout — GitHub Pages + Jekyll compatible */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #1a1a1a;
+  background: #fafafa;
+}
+.container {
+  display: flex;
+  min-height: 100vh;
+  align-items: flex-start;
+}
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 250px;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 1rem 1rem 2rem;
+  background: #f0f2f5;
+  border-right: 1px solid #d9dee5;
+  font-size: 14px;
+}
+.content {
+  margin-left: 250px;
+  flex: 1;
+  max-width: 900px;
+  padding: 1.75rem 2rem 3rem;
+  background: #fff;
+  min-height: 100vh;
+}
+.content h1, .content h2, .content h3 { margin-top: 1.25em; }
+.content h1:first-child { margin-top: 0; }
+.content pre, .content code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9em;
+}
+.content pre {
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+  background: #f4f4f4;
+  border-radius: 6px;
+}
+.content blockquote {
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  border-left: 4px solid #ccc;
+  background: #f9f9f9;
+}
+.side-nav__title {
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  font-size: 15px;
+}
+.side-nav__title a { color: #0d47a1; text-decoration: none; }
+.side-nav__title a:hover { text-decoration: underline; }
+.side-nav__docs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.doc-group {
+  margin: 0 0 0.35rem;
+  border: none;
+}
+.doc-group summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0.35rem 0.25rem;
+  list-style: none;
+}
+.doc-group summary::-webkit-details-marker { display: none; }
+.doc-group summary::before {
+  content: "▸ ";
+  display: inline-block;
+  width: 1em;
+  transition: transform 0.12s ease;
+}
+.doc-group[open] summary::before {
+  content: "▾ ";
+}
+.doc-group ul {
+  list-style: none;
+  margin: 0.25rem 0 0.5rem 0.75rem;
+  padding: 0;
+}
+.doc-group ul li { margin: 0.2rem 0; }
+.doc-group a { color: #1565c0; text-decoration: none; }
+.doc-group a:hover { text-decoration: underline; }
+.doc-group .nav-current { font-weight: 600; }
+@media (max-width: 768px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    max-height: 40vh;
+    border-right: none;
+    border-bottom: 1px solid #d9dee5;
+  }
+  .content { margin-left: 0; max-width: none; }
+}
