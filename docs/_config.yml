@@ -1,0 +1,7 @@
+title: "Production docs"
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+baseurl: ""
+plugins: []
