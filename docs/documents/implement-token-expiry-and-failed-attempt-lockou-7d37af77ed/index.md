@@ -1,0 +1,98 @@
+---
+layout: default
+title: "Implement token expiry and failed attempt lockout"
+---
+
+# Implement token expiry and failed attempt lockout
+
+**Current version:** V1  
+**Last updated:** 2026-04-30T01:02:27.363432+00:00  
+**Last approved by:** admin@example.com (_2026-04-30T01:02:28.260165+00:00_)  
+**Source PR:** https://github.com/Venkata-Bhumika-Guthi/Testing/pull/15
+
+## Current content
+
+# PR-15: Implement token expiry and failed attempt lockout
+## Summary
+This pull request introduces a new authentication system that includes token expiry, failed login attempt tracking, and account lockout functionality.
+
+## Why this change exists
+The changes aim to enhance security by implementing session management through token expiry and preventing brute-force attacks via a lockout mechanism after multiple failed login attempts.
+
+## What changed (by area)
+- **Authentication Logic**: A new file named `Auth with Token Expiry & Failed Attempt Lockout` was added, containing the following key functionalities:
+  - **Token Expiry**: Tokens expire after a configurable period (30 seconds by default).
+  - **Failed Attempt Tracking**: Tracks failed login attempts per user.
+  - **Lockout System**: Accounts are locked for 60 seconds after 3 failed attempts, with a countdown provided.
+  - **Auto-unlock**: Accounts automatically unlock after the cooldown period.
+
+## How to verify / test
+1. Attempt to log in with incorrect credentials multiple times (3 times) for a user (e.g., "alice").
+2. Verify that the account gets locked and a countdown message is displayed.
+3. After 60 seconds, attempt to log in again to ensure the account is unlocked.
+4. Log in successfully with correct credentials and check that a token is generated.
+5. Access a protected route using the token and verify the response.
+6. Wait for the token to expire and attempt to access the protected route again to confirm the session expiration message.
+
+## Operational notes (rollout, migrations, feature flags)
+**Not specified in PR materials.**
+
+## Risks / edge cases
+- Users may experience temporary lockouts if they forget their passwords and attempt to log in multiple times.
+- If the token expiry time is set too low, it may lead to user frustration due to frequent logouts.
+
+## Follow-ups
+**Not specified in PR materials.**
+
+## References
+- PR: [https://github.com/Venkata-Bhumika-Guthi/Testing/pull/15](https://github.com/Venkata-Bhumika-Guthi/Testing/pull/15)
+
+---
+
+## Source evidence (system)
+
+Structured provenance for reviewers (also stored in `source_metadata`):
+
+```json
+{
+  "pr_title": "Implement token expiry and failed attempt lockout",
+  "pr_url": "https://github.com/Venkata-Bhumika-Guthi/Testing/pull/15",
+  "pr_number": 15,
+  "repo": "venkata-bhumika-guthi/testing",
+  "merge_commit_sha": "0b2e04f4c08fe2fff243a0591e33f732d8fedb69",
+  "commits": [
+    {
+      "sha": "40cd6aa",
+      "message": "Implement token expiry and failed attempt lockout"
+    }
+  ],
+  "changed_files": [
+    {
+      "filename": "Auth with Token Expiry & Failed Attempt Lockout",
+      "status": "added",
+      "additions": 90,
+      "deletions": 0
+    }
+  ],
+  "diff_summary_excerpt": "diff --git a/Auth with Token Expiry & Failed Attempt Lockout b/Auth with Token Expiry & Failed Attempt Lockout\nnew file mode 100644\nindex 0000000..8e8c990\n--- /dev/null\n+++ b/Auth with Token Expiry & Failed Attempt Lockout\t\n@@ -0,0 +1,90 @@\n+import hashlib\n+import uuid\n+import time\n+\n+users_db = {\n+    \"alice\": hashlib.sha256(\"password123\".encode()).hexdigest(),\n+    \"bob\":   hashlib.sha256(\"securepass\".encode()).hexdigest(),\n+}\n+\n+active_tokens = {}\n+failed_attempts = {}\n+\n+TOKEN_EXPIRY_SECONDS = 30\n+MAX_ATTEMPTS = 3\n+LOCKOUT_SECONDS = 60\n+\n+def hash_password(password):\n+    return hashlib.sha256(password.encode()).hexdigest()\n+\n+def generate_token():\n+    return str(uuid.uuid4())\n+\n+def is_locked_out(username):\n+    if username in failed_attempts:\n+        attempts, last_time = failed_attempts[username]\n+        if attempts >= MAX_ATTEMPTS:\n+            if time.time() - last_time < LOCKOUT_SECONDS:\n+                remaining = int(LOCKOUT_SECONDS - (time.time() - last_time))\n+                return True, remaining\n+            else:\n+                del failed_attempts[username]\n+    return False, 0\n+\n+def record_failed(username):\n+    attempts, _ = failed_attempts.get(username, (0, 0))\n+    failed_attempts[username] = (attempts + 1, time.time())\n+\n+def login(username, password):\n+    locked, remaining = is_locked_out(username)\n+    if locked:\n+        return None, f\"Account locked. Try again in {remaining}s.\"\n+    if username not in users_db:\n+        return None, \"User not found.\"\n+    if users_db[username] != hash_password(password):\n+        record_failed(username)\n+        attempts = failed_attempts.get(username, (0,))[0]\n+        left = MAX_ATTEMPTS - attempts\n+        return None, f\"Wrong password. {left} attempt(s) left.\"\n+    failed_attempts.pop(username, None)\n+    token = generate_token()\n+    active_tokens[token] = {\"user\": username, \"created\": time.time()}\n+    return token, \"Login successful.\"\n+\n+def logout(token):\n+    if token in active_tokens:\n+        del active_tokens[token]\n+        return \"Logged out.\"\n+    return \"Invalid token.\"\n+\n+def get_current_user(token):\n+    if token not in active_tokens:\n+        return None, \"Invalid token.\"\n+    session = active_tokens[token]\n+    if time.time() - session[\"created\"] > TOKEN_EXPIRY_SECONDS:\n+        del active_tokens[token]\n+        return None, \"Session expired. Please log in again.\"\n+    return session[\"user\"], None\n+\n+def protected_route(token):\n+    user, error = get_current_user(token)\n+    if error:\n+        return f\"Access denied: {error}\"\n+    return f\"Welcome, {user}! You accessed a protected resource.\"\n+\n+# --- Run ---\n+token, msg = login(\"alice\", \"wrongpass\")\n+print(msg)\n+token, msg = login(\"alice\", \"wrongpass\")\n+print(msg)\n+token, msg = login(\"alice\", \"wrongpass\")\n+print(msg)\n+token, msg = login(\"alice\", \"password123\")\n+print(msg)\n+\n+token, msg = login(\"bob\", \"securepass\")\n+print(msg)\n+print(protected_route(token))\n+print(f\"\\nWaiting for token to expire ({TOKEN_EXPIRY_SECONDS}s)...\")\n+time.sleep(TOKEN_EXPIRY_SECONDS + 1)\n+print(protected_route(token))\n",
+  "pr_summary": "- Implemented token expiry feature with a default session duration of 30 seconds (configurable).\n- Introduced a failed attempt tracking system that counts incorrect password entries per user.\n- Established a lockout mechanism that locks the account for 60 seconds after 3 failed login attempts.\n- Added an auto-unlock feature that clears the lockout automatically after the cooldown period.\n- Created a new file for the implementation titled \"Auth with Token Expiry & Failed Attempt Lockout\".\n- Included functions for password hashing, token generation, and user authentication.\n- Implemented logic to check if a user is locked out and to record failed login attempts.\n- Provided a mechanism to log in and log out users, along with session management.\n- Added error handling for invalid tokens and expired sessions in protected routes.",
+  "change_classification": {
+    "labels": [],
+    "skip_score": 0.0,
+    "feature_score": 0.25
+  },
+  "documentation_rationale": "Generated documentation draft from merged PR materials.",
+  "decision_reason": "New feature related to token expiry and account lockout not covered by existing documentation."
+}
+```
+
+
+## Source evidence (summary)
+
+- **pr_number:** 15
+- **pr_url:** https://github.com/Venkata-Bhumika-Guthi/Testing/pull/15
+- **decision_reason:** New feature related to token expiry and account lockout not covered by existing documentation.
+
+## Version history
+
+- [V1](./versions/v1.html) — _created_
