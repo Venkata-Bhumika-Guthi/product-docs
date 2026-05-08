@@ -1,0 +1,60 @@
+---
+layout: default
+title: "Add files via upload"
+---
+
+# Add files via upload
+
+Security risk detected: a secret-like value was present in source changes and was redacted. Reviewer should remove or rotate the secret before publishing.
+
+# PR-27: Add files via upload
+## Document lifecycle
+This page is a **low-context AI draft** that **needs_human_review**. The merge commit SHA is `bc87beef359b3a8750327f62673ad44de352f4cd`.
+
+## Summary
+- A new file `app_ui.py` was added.
+- The file implements a Streamlit UI for an AI vulnerability triage tool.
+- It includes a text area for users to paste vulnerability reports.
+- A button triggers the analysis of the report using an AI agent.
+- The results are displayed in a markdown format.
+- Uday kumar
+## What changed (by area)
+- **File Added**: `app_ui.py`
+  - Implements the user interface for the vulnerability triage application.
+
+## Evidence map
+| Claim | Primary source | Notes |
+| ----- | -------------- | ----- |
+| A new file `app_ui.py` was added. | PR title | - |
+| The file implements a Streamlit UI for an AI vulnerability triage tool. | diff | - |
+| It includes a text area for users to paste vulnerability reports. | diff | - |
+| A button triggers the analysis of the report using an AI agent. | diff | - |
+| The results are displayed in a markdown format. | diff | - |
+
+## How to verify / test
+- Review the `app_ui.py` file to ensure the Streamlit UI components are correctly implemented.
+- Run the Streamlit application and test the functionality of the text area and button.
+
+## Risks / edge cases
+- Ensure that the AI agent integration handles errors gracefully.
+- Validate that the input from users is sanitized to prevent any potential security issues.
+
+## Follow-ups
+- Consider adding unit tests for the functionality in `app_ui.py`.
+
+## References
+- PR: [https://github.com/Venkata-Bhumika-Guthi/Testing/pull/27](https://github.com/Venkata-Bhumika-Guthi/Testing/pull/27)
+
+## References
+
+- **Pull request:** https://github.com/Venkata-Bhumika-Guthi/Testing/pull/27
+- **Version:** V1
+- **Last updated:** 2026-05-08T06:09:35.902177+00:00
+- **Source repository:** `venkata-bhumika-guthi/testing`
+
+
+**Last approved by:** admin@example.com (_2026-05-08T06:09:36.649192+00:00_)
+
+## Version history
+
+- [V1](./versions/v1.html) — _manual_edit_
