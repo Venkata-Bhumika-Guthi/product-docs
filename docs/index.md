@@ -6,13 +6,16 @@ title: "Home"
 
 # Documentation
 
-_Generated: 2026-05-08T02:59:57.356691+00:00_
+_Generated: 2026-05-08T05:27:44.308978+00:00_
 
 Browse **logical documents** from the left sidebar. Each document has a **Current** page plus **version history** links.
 
 ## All documents
 
-- **Add files via upload** — current **V1**, last updated _2026-05-08T02:59:41.386389+00:00_
+- **Add OPENROUTER_API_KEY to game.py** — current **V1**, last updated _2026-05-08T05:27:23.045557+00:00_
+  — _venkata-bhumika-guthi/testing_ — [Open document]({{ site.baseurl }}/documents/add-openrouter-api-key-to-game-py-baec4eac64/index.html)
+
+- **Add files via upload** — current **V1**, last updated _2026-05-08T02:59:46.750546+00:00_
   — _venkata-bhumika-guthi/testing_ — [Open document]({{ site.baseurl }}/documents/add-files-via-upload-8f3f69cf5b/index.html)
 
 - **Add files via upload** — current **V1**, last updated _2026-05-08T02:34:57.415531+00:00_
