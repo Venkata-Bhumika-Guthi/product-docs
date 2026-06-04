@@ -6,26 +6,14 @@ title: "Home"
 
 # Documentation
 
-_Generated: 2026-05-20T02:41:31.345558+00:00_
+_Generated: 2026-06-04T01:11:28.801114+00:00_
 
 Browse **logical documents** from the left sidebar. Each document has a **Current** page plus **version history** links.
 
 ## All documents
 
-- **Implementation Plan** — current **V1**, last updated _2026-05-20T02:40:23.546132+00:00_
-  — ___manual_intake___ — [Open document]({{ site.baseurl }}/documents/implementation-plan-b2571c9922/index.html)
-
-- **Uday Test circuitbreak.py** — current **V1**, last updated _2026-05-19T21:02:00.250530+00:00_
-  — _venkata-bhumika-guthi/testing_ — [Open document]({{ site.baseurl }}/documents/uday-test-circuitbreak-py-5e36e84455/index.html)
-
-- **Implement CircuitBreaker for failure management** — current **V1**, last updated _2026-05-19T20:43:11.832299+00:00_
-  — _venkata-bhumika-guthi/testing_ — [Open document]({{ site.baseurl }}/documents/implement-circuitbreaker-for-failure-management-fb51db3bbe/index.html)
-
 - **Implement custom exception classes for error handling** — current **V1**, last updated _2026-05-19T01:58:13.078258+00:00_
   — _venkata-bhumika-guthi/testing_ — [Open document]({{ site.baseurl }}/documents/implement-custom-exception-classes-for-error-han-0681e9b8c1/index.html)
-
-- **Implement token expiry and failed attempt lockout** — current **V1**, last updated _2026-05-14T23:36:23.682904+00:00_
-  — _venkata-bhumika-guthi/testing_ — [Open document]({{ site.baseurl }}/documents/implement-token-expiry-and-failed-attempt-lockou-7d37af77ed/index.html)
 
 - **Create Converts Celsius to Fahrenheit** — current **V1**, last updated _2026-05-14T04:01:12.395406+00:00_
   — _venkata-bhumika-guthi/testing_ — [Open document]({{ site.baseurl }}/documents/create-converts-celsius-to-fahrenheit-b8114929b3/index.html)
@@ -35,9 +23,6 @@ Browse **logical documents** from the left sidebar. Each document has a **Curren
 
 - **Add sample test to Test_1.py Uday Kumar Nidadala** — current **V1**, last updated _2026-05-13T22:25:13.640830+00:00_
   — _venkata-bhumika-guthi/testing_ — [Open document]({{ site.baseurl }}/documents/add-sample-test-to-test-1-py-uday-kumar-nidadala-a98c38e11b/index.html)
-
-- **Add OPENROUTER_API_KEY to game.py** — current **V1**, last updated _2026-05-08T05:27:29.408836+00:00_
-  — _venkata-bhumika-guthi/testing_ — [Open document]({{ site.baseurl }}/documents/add-openrouter-api-key-to-game-py-baec4eac64/index.html)
 
 - **Add files via upload** — current **V1**, last updated _2026-05-08T02:59:46.750546+00:00_
   — _venkata-bhumika-guthi/testing_ — [Open document]({{ site.baseurl }}/documents/add-files-via-upload-8f3f69cf5b/index.html)
